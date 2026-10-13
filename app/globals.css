@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #030303;
+  --foreground: #F2F2F2;
+  --yellow: #FFE500;
+  --yellow-glow: rgba(255, 229, 0, 0.35);
+  --yellow-dim: rgba(255, 229, 0, 0.12);
+  --surface: #0a0a0a;
+  --surface-border: rgba(242, 242, 242, 0.08);
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-yellow: var(--yellow);
+  --color-yellow-glow: var(--yellow-glow);
+  --color-yellow-dim: var(--yellow-dim);
+  --color-surface: var(--surface);
+  --color-surface-border: var(--surface-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  background-color: #030303;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  selection-background-color: #FFE500;
+  selection-color: #030303;
 }
+
+::selection {
+  background: #FFE500;
+  color: #030303;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030303;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFE500;
+}
+
+/* Scanlines overlay */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.01),
+    rgba(0, 255, 0, 0.005),
+    rgba(0, 0, 255, 0.01)
+  );
+  background-size: 100% 3px, 6px 100%;
+}
+
+/* Grid overlay */
+.tech-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Electric glow effects */
+.text-glow-yellow {
+  text-shadow: 0 0 12px rgba(255, 229, 0, 0.6), 0 0 24px rgba(255, 229, 0, 0.2);
+}
+
+.box-glow-yellow {
+  box-shadow: 0 0 20px rgba(255, 229, 0, 0.25), inset 0 0 10px rgba(255, 229, 0, 0.1);
+}
+
+/* Cursor lighting backdrop */
+.cursor-ambient-light {
+  background: radial-gradient(
+    650px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 229, 0, 0.06),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
